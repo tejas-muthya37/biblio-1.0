@@ -13,6 +13,8 @@ function Checkout() {
     localStorage.getItem("SAVED_ADDRESSES")
   );
 
+  if (storedSavedAddresses === null) storedSavedAddresses = [];
+
   const cartTotal = cartArray.reduce((accumulator, currentValue) => {
     accumulator += currentValue.bookPrice * currentValue.bookQuantity;
     return accumulator;
@@ -362,7 +364,7 @@ function Checkout() {
               <input
                 type="hidden"
                 name="_next"
-                value="http://localhost:3000/success"
+                value="http://localhost:3001/success"
               />
               <input
                 type="hidden"

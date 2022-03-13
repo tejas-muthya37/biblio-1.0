@@ -4,12 +4,12 @@ const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
   var storedCartArray = JSON.parse(localStorage.getItem("CART_ARRAY"));
-  if (storedCartArray === undefined) storedCartArray = [];
+  if (storedCartArray === null) storedCartArray = [];
 
   const [cartArray, setCartArray] = useState(storedCartArray);
 
   var storedWishlistArray = JSON.parse(localStorage.getItem("WISHLIST_ARRAY"));
-  if (storedWishlistArray === undefined) storedWishlistArray = [];
+  if (storedWishlistArray === null) storedWishlistArray = [];
 
   const [wishlistArray, setWishlistArray] = useState(storedWishlistArray);
   return (
