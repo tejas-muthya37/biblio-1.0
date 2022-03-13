@@ -45,14 +45,6 @@
     }
 }
 
-/* @media screen and (max-width: 385px) {
-
-    .landing-page-container.wishlist,
-    .landing-page-container.wishlist>* {
-        padding: 0;
-    }
-} */
-
 @media screen and (max-width: 360px) {
     .wishlist-title {
         font-size: 1.3rem;
