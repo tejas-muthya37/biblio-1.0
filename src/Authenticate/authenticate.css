@@ -1,0 +1,106 @@
+:root {
+    --body-bg: #012652;
+    --heading-color: #0D94FB;
+    --secondary-color: #888888;
+    --tertiary-color: #BEBEBE;
+    --near-black: #282828;
+}
+
+* {
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--body-bg);
+}
+
+.landing-card {
+    margin: 11rem auto 0 auto;
+    width: 23rem;
+    background-color: whitesmoke;
+    padding: 1.5rem;
+    border-radius: 5px;
+}
+
+.landing-card a {
+    color: var(--near-black);
+    text-decoration: none;
+}
+
+.landing-card>* {
+    margin: auto;
+}
+
+.landing-card h1 {
+    color: var(--near-black);
+    text-align: center;
+    font-size: 1.75rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.landing-inputs {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0 0.75rem 0;
+}
+
+.landing-inputs .label-with-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+}
+
+.landing-inputs label {
+    margin-bottom: 5px;
+    color: #888888;
+}
+
+.landing-inputs input {
+    height: 25px;
+    background-color: whitesmoke;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--tertiary-color);
+}
+
+.secondary-cta-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.secondary-cta-section label {
+    margin-left: 8px;
+}
+
+.secondary-cta-section a {
+    font-size: 0.9rem;
+    color: var(--heading-color);
+}
+
+.secondary-cta-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.landing-card button {
+    background-color: var(--heading-color);
+    border: none;
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    color: whitesmoke;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 2rem 0;
+    cursor: pointer;
+}
+
+.alternate-cta {
+    text-align: center;
+    font-size: 1rem;
+}
