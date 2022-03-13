@@ -1,13 +1,11 @@
 import "./products.css";
 import Card from "../Card/Card";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useProducts } from "./../products-context";
 import { useToast } from "./../toast-context";
 import { useFilter } from "./../filter-context";
 
 function Products(props) {
-  const inputRef = useRef(null);
-
   const clearFilters = () => {
     window.location.reload();
   };
@@ -83,7 +81,6 @@ function Products(props) {
               min="150"
               max="450"
               step="100"
-              ref={inputRef}
             />
             <p>
               <span> 150 </span> <span> 250 </span> <span> 350 </span>{" "}
@@ -98,7 +95,6 @@ function Products(props) {
                   id="Thriller"
                   className="category-checkbox"
                   type="checkbox"
-                  ref={inputRef}
                   onChange={(event) =>
                     dispatch({ type: "Category filter", payload: event.target })
                   }
@@ -110,7 +106,6 @@ function Products(props) {
                   id="Drama"
                   className="category-checkbox"
                   type="checkbox"
-                  ref={inputRef}
                   onChange={(event) =>
                     dispatch({ type: "Category filter", payload: event.target })
                   }
@@ -122,7 +117,6 @@ function Products(props) {
                   id="Scifi"
                   className="category-checkbox"
                   type="checkbox"
-                  ref={inputRef}
                   onChange={(event) =>
                     dispatch({ type: "Category filter", payload: event.target })
                   }
@@ -134,7 +128,6 @@ function Products(props) {
                   id="Romance"
                   className="category-checkbox"
                   type="checkbox"
-                  ref={inputRef}
                   onChange={(event) =>
                     dispatch({ type: "Category filter", payload: event.target })
                   }
@@ -151,7 +144,6 @@ function Products(props) {
                 value={4}
                 id="rating-4-stars-and-above"
                 name="rating-input"
-                ref={inputRef}
                 onClick={(event) =>
                   dispatch({
                     type: "Rating filter",
@@ -167,7 +159,6 @@ function Products(props) {
                 value={3}
                 id="rating-3-stars-and-above"
                 name="rating-input"
-                ref={inputRef}
                 onClick={(event) =>
                   dispatch({
                     type: "Rating filter",
@@ -183,7 +174,6 @@ function Products(props) {
                 value={2}
                 id="rating-2-stars-and-above"
                 name="rating-input"
-                ref={inputRef}
                 onClick={(event) =>
                   dispatch({
                     type: "Rating filter",
@@ -201,7 +191,6 @@ function Products(props) {
                 type="radio"
                 id="radio-5"
                 name="sort-input"
-                ref={inputRef}
                 onClick={() => dispatch({ type: "Low to High" })}
               />
               <label htmlFor="radio-5"> Low to High </label>{" "}
@@ -211,7 +200,6 @@ function Products(props) {
                 type="radio"
                 id="radio-6"
                 name="sort-input"
-                ref={inputRef}
                 onClick={() => dispatch({ type: "High to Low" })}
               />
               <label htmlFor="radio-6"> High to Low </label>{" "}
