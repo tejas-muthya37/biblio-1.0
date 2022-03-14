@@ -64,6 +64,7 @@ const reducer = (state, action) => {
             return true;
           });
           if (tempProductsArray.length === 0) {
+            console.log("Testing!");
             state.items.map((item) => (item.show = true));
             return {
               items: state.items,
