@@ -39,16 +39,28 @@ const reducer = (state, action) => {
         items: state.items,
       };
     case "Category filter":
+      // NOTE THAT 'show' is a property in every book object that I am using to maintain show/hide of books on
+      // applying filters. I am not filtering the array, instead just showing or hiding.
+
+      // categoryFiltersFlag is a flag that I am maintaining in the state to check whether this is the first time
+      // the filter is being applied or not. The reason why I am maintaining this flag is, if it is the
+      // first time that the filter is being applied, then I just want to show the categories that are selected and
+      // hide the rest. If it's not the first time, I am just showing whatever category is selected and not hiding anything.
+      // This is to prevent the hiding of the previously selected category if I select a second category.
       if (state.categoryFiltersFlag === false) {
+        // handling the scenario of the user applying the filter for the first time.
         state.items.map((item) => {
           item.bookCategory === action.payload.id
             ? (item.show = true)
             : (item.show = false);
           return true;
         });
+        // notice that the flag is set to true as soon as a user checks any category checkbox.
         return { items: state.items, categoryFiltersFlag: true };
       } else {
+        // handling the subsequent checks and unchecks here.
         if (action.payload.checked) {
+          // handling a subsequent check with the help of the checked property.
           state.items.map((item) => {
             if (item.bookCategory === action.payload.id) {
               item.show = true;
@@ -56,6 +68,10 @@ const reducer = (state, action) => {
             return true;
           });
         } else {
+          // handling a subsequent uncheck.
+
+          // this reducer is to check the no of items shown after every uncheck.
+
           const itemShowCount = state.items.reduce(
             (accumulator, currentValue) => {
               if (currentValue.show === true) accumulator += 1;
@@ -63,13 +79,20 @@ const reducer = (state, action) => {
             },
             0
           );
+
+          // if the no of items shown is 0 after an uncheck, it means that the user has
+          // not selected any category. I am mapping through the array and assigning the show
+          // attribute to true for every item since we don't want to see a blank page.
+
           if (itemShowCount === 0) {
-            console.log("Testing");
             state.items.map((item) => (item.show = true));
+            // notice that the flag is set to false as soon as a user has unchecked all category checkboxes.
             return {
               items: state.items,
               categoryFiltersFlag: false,
             };
+
+            // if the no of items shown is not 0 after an uncheck, I am just hiding whatever category is unchecked.
           } else {
             state.items.map((item) => {
               if (item.bookCategory === action.payload.id) item.show = false;
