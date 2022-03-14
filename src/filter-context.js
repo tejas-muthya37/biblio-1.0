@@ -51,21 +51,39 @@ const reducer = (state, action) => {
         const tempProductsArray = state.items.filter(
           (item) => item.show === true
         );
-        state.items.map((item) => {
-          if (action.payload.checked) {
+        if (action.payload.checked) {
+          state.items.map((item) => {
             if (item.bookCategory === action.payload.id) {
               item.show = true;
             }
+            return true;
+          });
+        } else {
+          if (tempProductsArray.length === 0) {
+            state.items.map((item) => (item.show = true));
+            return { items: state.items, categoryFiltersFlag: false };
           } else {
-            if (tempProductsArray.length === 0) {
-              state.items.map((item) => (item.show = true));
-              return { items: state.items, categoryFiltersFlag: false };
-            } else if (item.bookCategory === action.payload.id) {
-              item.show = false;
-            }
+            state.items.map((item) => {
+              if (item.bookCategory === action.payload.id) item.show = false;
+              return true;
+            });
           }
-          return true;
-        });
+        }
+        // state.items.map((item) => {
+        //   if (action.payload.checked) {
+        //     if (item.bookCategory === action.payload.id) {
+        //       item.show = true;
+        //     }
+        //   } else {
+        //     if (tempProductsArray.length === 0) {
+        //       state.items.map((item) => (item.show = true));
+        //       return { items: state.items, categoryFiltersFlag: false };
+        //     } else if (item.bookCategory === action.payload.id) {
+        //       item.show = false;
+        //     }
+        //   }
+        //   return true;
+        // });
       }
       return {
         ...state,
