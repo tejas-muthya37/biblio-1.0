@@ -48,9 +48,6 @@ const reducer = (state, action) => {
         });
         return { items: state.items, categoryFiltersFlag: true };
       } else {
-        const tempProductsArray = state.items.filter(
-          (item) => item.show === true
-        );
         if (action.payload.checked) {
           state.items.map((item) => {
             if (item.bookCategory === action.payload.id) {
@@ -59,17 +56,25 @@ const reducer = (state, action) => {
             return true;
           });
         } else {
-          state.items.map((item) => {
-            if (item.bookCategory === action.payload.id) item.show = false;
-            return true;
-          });
-          if (tempProductsArray.length === 0) {
-            console.log("Testing!");
+          const itemShowCount = state.items.reduce(
+            (accumulator, currentValue) => {
+              if (currentValue.show === true) accumulator += 1;
+              return accumulator;
+            },
+            0
+          );
+          if (itemShowCount === 0) {
+            console.log("Testing");
             state.items.map((item) => (item.show = true));
             return {
               items: state.items,
               categoryFiltersFlag: false,
             };
+          } else {
+            state.items.map((item) => {
+              if (item.bookCategory === action.payload.id) item.show = false;
+              return true;
+            });
           }
         }
       }
