@@ -109,10 +109,6 @@ const reducer = (state, action) => {
           }
         }
       }
-    // return {
-    //   ...state,
-    //   items: state.items,
-    // };
     default:
       return state;
   }
