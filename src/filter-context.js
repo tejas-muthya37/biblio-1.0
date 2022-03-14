@@ -48,26 +48,24 @@ const reducer = (state, action) => {
         });
         return { ...state, categoryFiltersFlag: true };
       } else {
-        var tempProductsArray = state.items.filter(
+        const tempProductsArray = state.items.filter(
           (item) => item.show === true
         );
-        if (tempProductsArray.length === 0) {
-          state.items.map((item) => (item.show = true));
-          return { items: state.items, categoryFiltersFlag: false };
-        } else {
-          state.items.map((item) => {
-            if (action.payload.checked) {
-              if (item.bookCategory === action.payload.id) {
-                item.show = true;
-              }
-            } else {
-              if (item.bookCategory === action.payload.id) {
-                item.show = false;
-              }
+        state.items.map((item) => {
+          if (action.payload.checked) {
+            if (item.bookCategory === action.payload.id) {
+              item.show = true;
             }
-            return true;
-          });
-        }
+          } else {
+            if (tempProductsArray.length === 0) {
+              state.items.map((item) => (item.show = true));
+              return { ...state, categoryFiltersFlag: false };
+            } else if (item.bookCategory === action.payload.id) {
+              item.show = false;
+            }
+          }
+          return true;
+        });
       }
       return {
         ...state,
