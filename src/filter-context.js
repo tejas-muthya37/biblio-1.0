@@ -46,7 +46,7 @@ const reducer = (state, action) => {
             : (item.show = false);
           return true;
         });
-        return { ...state, categoryFiltersFlag: true };
+        return { items: state.items, categoryFiltersFlag: true };
       } else {
         const tempProductsArray = state.items.filter(
           (item) => item.show === true
@@ -59,7 +59,7 @@ const reducer = (state, action) => {
           } else {
             if (tempProductsArray.length === 0) {
               state.items.map((item) => (item.show = true));
-              return { ...state, categoryFiltersFlag: false };
+              return { items: state.items, categoryFiltersFlag: false };
             } else if (item.bookCategory === action.payload.id) {
               item.show = false;
             }
