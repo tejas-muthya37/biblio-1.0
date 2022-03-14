@@ -67,6 +67,10 @@ const reducer = (state, action) => {
             }
             return true;
           });
+          return {
+            items: state.items,
+            categoryFiltersFlag: true,
+          };
         } else {
           // handling a subsequent uncheck.
 
@@ -98,13 +102,17 @@ const reducer = (state, action) => {
               if (item.bookCategory === action.payload.id) item.show = false;
               return true;
             });
+            return {
+              items: state.items,
+              categoryFiltersFlag: true,
+            };
           }
         }
       }
-      return {
-        ...state,
-        items: state.items,
-      };
+    // return {
+    //   ...state,
+    //   items: state.items,
+    // };
     default:
       return state;
   }
