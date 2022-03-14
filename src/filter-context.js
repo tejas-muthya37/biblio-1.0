@@ -53,7 +53,7 @@ const reducer = (state, action) => {
         );
         if (tempProductsArray.length === 0) {
           state.items.map((item) => (item.show = true));
-          return { ...state, categoryFiltersFlag: false };
+          return { items: state.items, categoryFiltersFlag: false };
         } else {
           state.items.map((item) => {
             if (action.payload.checked) {
