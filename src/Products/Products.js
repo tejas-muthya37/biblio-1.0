@@ -1,13 +1,24 @@
 import "./products.css";
 import Card from "../Card/Card";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useProducts } from "./../products-context";
 import { useToast } from "./../toast-context";
 import { useFilter } from "./../filter-context";
 
 function Products(props) {
+  const inputRef = useRef(null);
+
+  const inputs = document.querySelectorAll('input:not([type="text"])');
+
   const clearFilters = () => {
-    window.location.reload();
+    dispatch({ type: "Clear filter" });
+    inputs.forEach((input) => {
+      if (input.type === "range") {
+        input.value = "150";
+      } else {
+        input.checked = false;
+      }
+    });
   };
 
   const { state, dispatch } = useFilter();
@@ -74,6 +85,7 @@ function Products(props) {
           <div className="price-filter">
             <h3 className="filter-header"> Price </h3>{" "}
             <input
+              ref={inputRef}
               onChange={(event) =>
                 dispatch({ type: "Price filter", payload: event.target.value })
               }
@@ -92,6 +104,7 @@ function Products(props) {
               <h3 className="filter-header"> Category </h3>{" "}
               <div>
                 <input
+                  ref={inputRef}
                   id="Thriller"
                   className="category-checkbox"
                   type="checkbox"
@@ -103,6 +116,7 @@ function Products(props) {
               </div>{" "}
               <div>
                 <input
+                  ref={inputRef}
                   id="Drama"
                   className="category-checkbox"
                   type="checkbox"
@@ -114,6 +128,7 @@ function Products(props) {
               </div>{" "}
               <div>
                 <input
+                  ref={inputRef}
                   id="Scifi"
                   className="category-checkbox"
                   type="checkbox"
@@ -125,6 +140,7 @@ function Products(props) {
               </div>{" "}
               <div>
                 <input
+                  ref={inputRef}
                   id="Romance"
                   className="category-checkbox"
                   type="checkbox"
@@ -140,6 +156,7 @@ function Products(props) {
             <h3 className="filter-header"> Rating </h3>{" "}
             <div>
               <input
+                ref={inputRef}
                 type="radio"
                 value={4}
                 id="rating-4-stars-and-above"
@@ -155,6 +172,7 @@ function Products(props) {
             </div>{" "}
             <div>
               <input
+                ref={inputRef}
                 type="radio"
                 value={3}
                 id="rating-3-stars-and-above"
@@ -170,6 +188,7 @@ function Products(props) {
             </div>{" "}
             <div>
               <input
+                ref={inputRef}
                 type="radio"
                 value={2}
                 id="rating-2-stars-and-above"
@@ -188,6 +207,7 @@ function Products(props) {
             <h3 className="filter-header"> Sort by </h3>{" "}
             <div>
               <input
+                ref={inputRef}
                 type="radio"
                 id="radio-5"
                 name="sort-input"
@@ -197,6 +217,7 @@ function Products(props) {
             </div>{" "}
             <div>
               <input
+                ref={inputRef}
                 type="radio"
                 id="radio-6"
                 name="sort-input"

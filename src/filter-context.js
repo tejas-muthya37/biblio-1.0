@@ -85,6 +85,13 @@ const reducer = (state, action) => {
           }
         }
       }
+    case "Clear filter":
+      state.items.map((item) => (item.show = true));
+      return {
+        items: state.items,
+        categoryFiltersFlag: false,
+        checkedCount: 0,
+      };
     default:
       return state;
   }
