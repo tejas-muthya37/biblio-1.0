@@ -4,13 +4,16 @@ import App from "./App";
 import { ProductsProvider } from "./products-context";
 import { ToastProvider } from "./toast-context";
 import { FilterProvider } from "./filter-context";
+import { AddressProvider } from "./address-context";
 
 ReactDOM.render(
   <React.StrictMode>
     <ProductsProvider>
       <ToastProvider>
         <FilterProvider>
-          <App />
+          <AddressProvider>
+            <App />
+          </AddressProvider>
         </FilterProvider>
       </ToastProvider>
     </ProductsProvider>

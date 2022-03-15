@@ -1,11 +1,12 @@
 import "./checkout.css";
 import AddressForm from "./../AddressForm/AddressForm";
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState } from "react";
 import uuid from "react-uuid";
 import { useProducts } from "./../products-context.js";
 import Empty from "../Empty/Empty";
 import emptyImage from "./../Media/empty-cart.png";
 import { useToast } from "./../toast-context";
+import { useAddress } from "./../address-context";
 
 function Checkout() {
   const { cartArray } = useProducts();
@@ -29,108 +30,19 @@ function Checkout() {
 
   if (storedSavedAddresses === undefined) storedSavedAddresses = [];
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "address-line-1":
-        return {
-          ...state,
-          address: { ...state.address, addressLine1: action.payload },
-        };
-      case "address-line-2":
-        return {
-          ...state,
-          address: { ...state.address, addressLine2: action.payload },
-        };
-      case "address-line-3":
-        return {
-          ...state,
-          address: { ...state.address, addressLine3: action.payload },
-        };
-      case "address-line-4":
-        return {
-          ...state,
-          address: { ...state.address, addressLine4: action.payload },
-        };
-      case "address-line-5":
-        return {
-          ...state,
-          address: { ...state.address, addressLine5: action.payload },
-        };
-      case "address-line-6":
-        return {
-          ...state,
-          address: { ...state.address, addressLine6: action.payload },
-        };
-      case "address-line-7":
-        return {
-          ...state,
-          address: { ...state.address, addressLine7: action.payload },
-        };
-      case "edit-address":
-        return {
-          ...state,
-          address: {
-            addressLine1: action.payload[0],
-            addressLine2: action.payload[1],
-            addressLine3: action.payload[2],
-            addressLine4: action.payload[3],
-            addressLine5: action.payload[4],
-            addressLine6: action.payload[5],
-            addressLine7: action.payload[6],
-          },
-        };
-      case "reset-to-default":
-        return {
-          ...state,
-          address: {
-            addressLine1: "",
-            addressLine2: "",
-            addressLine3: "",
-            addressLine4: "",
-            addressLine5: "",
-            addressLine6: "",
-            addressLine7: "",
-          },
-        };
-      default:
-        return state;
-    }
-  };
-
-  var [state, dispatch] = useReducer(reducer, {
-    address: {
-      addressLine1: "",
-      addressLine2: "",
-      addressLine3: "",
-      addressLine4: "",
-      addressLine5: "",
-      addressLine6: "",
-      addressLine7: "",
-    },
-  });
+  const { state, dispatch } = useAddress();
+  const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
   const [savedAddresses, setSavedAddresses] = useState(storedSavedAddresses);
   const [formDisplay, setFormDisplay] = useState(false);
   const [editingAddress, setEditingAddress] = useState(false);
-
   const [editedAddressId, setEditedAddressId] = useState("");
 
-  const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
-
-  var defaultSelectedAddress;
-
-  if (savedAddresses.length > 0) {
-    defaultSelectedAddress = savedAddresses[0].addressContent.split(", ");
-  }
-
   const [selectedAddress, setSelectedAddress] = useState({
-    name: savedAddresses.length > 0 ? defaultSelectedAddress[0] : "",
-    mobile: savedAddresses.length > 0 ? defaultSelectedAddress[1] : "",
-    email: savedAddresses.length > 0 ? defaultSelectedAddress[2] : "",
-    address:
-      savedAddresses.length > 0
-        ? `${defaultSelectedAddress[4]} ${defaultSelectedAddress[3]} ${defaultSelectedAddress[5]} ${defaultSelectedAddress[6]}`
-        : "",
+    name: "",
+    mobile: "",
+    email: "",
+    address: "",
   });
 
   const [isAddressSelected, setIsAddressSelected] = useState(false);
