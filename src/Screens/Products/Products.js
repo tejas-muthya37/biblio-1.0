@@ -111,7 +111,7 @@ function Products(props) {
                   onChange={(event) =>
                     dispatch({ type: "Category filter", payload: event.target })
                   }
-                />{" "}
+                />
                 <label htmlFor="thriller-category"> Thrillers </label>{" "}
               </div>{" "}
               <div>
