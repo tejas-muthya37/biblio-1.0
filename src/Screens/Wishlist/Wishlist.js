@@ -1,10 +1,10 @@
 import "./wishlist.css";
-import Card from "../Card/Card";
+import Card from "./../../Components/Card/Card";
 import { useEffect } from "react";
-import { useProducts } from "./../products-context";
-import Empty from "../Empty/Empty";
-import emptyImage from "./../Media/empty-cart.png";
-import { useToast } from "./../toast-context";
+import { useProducts } from "./../../Context/products-context";
+import Empty from "./../../Components/Empty/Empty";
+import emptyImage from "./../../Media/empty-cart.png";
+import { useToast } from "./../../Context/toast-context";
 
 function Wishlist() {
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();

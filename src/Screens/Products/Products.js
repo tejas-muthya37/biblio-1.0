@@ -1,9 +1,9 @@
 import "./products.css";
-import Card from "../Card/Card";
+import Card from "./../../Components/Card/Card";
 import { useEffect, useRef } from "react";
-import { useProducts } from "./../products-context";
-import { useToast } from "./../toast-context";
-import { useFilter } from "./../filter-context";
+import { useProducts } from "./../../Context/products-context";
+import { useToast } from "./../../Context/toast-context";
+import { useFilter } from "./../../Context/filter-context";
 
 function Products(props) {
   const inputRef = useRef(null);

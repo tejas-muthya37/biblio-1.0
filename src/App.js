@@ -1,12 +1,12 @@
 import "./App.css";
-import Navbar from "./Navbar/Navbar";
-// import Authenticate from "./Authenticate/Authenticate";
-import Cart from "./Cart/Cart";
-import Wishlist from "./Wishlist/Wishlist";
-import Products from "./Products/Products";
-import Categories from "./Categories/Categories";
-import Checkout from "./Checkout/Checkout";
-import Success from "./Success/Success";
+import Navbar from "./Components/Navbar/Navbar";
+// import Authenticate from "./Screens/Authenticate/Authenticate";
+import Cart from "./Screens/Cart/Cart";
+import Wishlist from "./Screens/Wishlist/Wishlist";
+import Products from "./Screens/Products/Products";
+import Categories from "./Screens/Categories/Categories";
+import Checkout from "./Screens/Checkout/Checkout";
+import Success from "./Screens/Success/Success";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {

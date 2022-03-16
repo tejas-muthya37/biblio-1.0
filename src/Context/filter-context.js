@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import productsArray from "./productsArray.js";
+import productsArray from "./../productsArray.js";
 
 const FilterContext = createContext();
 

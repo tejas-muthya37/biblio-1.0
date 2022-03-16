@@ -2,7 +2,7 @@ import "./navbar.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link } from "react-router-dom";
-import { useProducts } from "./../products-context";
+import { useProducts } from "./../../Context/products-context";
 
 function Navbar() {
   const { cartArray, wishlistArray } = useProducts();

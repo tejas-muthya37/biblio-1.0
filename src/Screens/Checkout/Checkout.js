@@ -1,12 +1,12 @@
 import "./checkout.css";
-import AddressForm from "./../AddressForm/AddressForm";
+import AddressForm from "./../../Components/AddressForm/AddressForm";
 import { useEffect, useState } from "react";
 import uuid from "react-uuid";
-import { useProducts } from "./../products-context.js";
-import Empty from "../Empty/Empty";
-import emptyImage from "./../Media/empty-cart.png";
-import { useToast } from "./../toast-context";
-import { useAddress } from "./../address-context";
+import { useProducts } from "./../../Context/products-context.js";
+import Empty from "./../../Components/Empty/Empty";
+import emptyImage from "./../../Media/empty-cart.png";
+import { useToast } from "./../../Context/toast-context";
+import { useAddress } from "./../../Context/address-context";
 
 function Checkout() {
   const { cartArray } = useProducts();
