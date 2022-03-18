@@ -5,6 +5,9 @@ import { ProductsProvider } from "./Context/products-context";
 import { ToastProvider } from "./Context/toast-context";
 import { FilterProvider } from "./Context/filter-context";
 import { AddressProvider } from "./Context/address-context";
+import { makeServer } from "./server";
+
+makeServer();
 
 ReactDOM.render(
   <React.StrictMode>

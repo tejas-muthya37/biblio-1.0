@@ -8,12 +8,16 @@ import Categories from "./Screens/Categories/Categories";
 import Checkout from "./Screens/Checkout/Checkout";
 import Success from "./Screens/Success/Success";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Mockman from "mockman-js";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
+          <Route exact path="/mock">
+            <Mockman />
+          </Route>
           <Route exact path="/">
             <Navbar />
             <Categories />
