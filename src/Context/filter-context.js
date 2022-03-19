@@ -1,10 +1,14 @@
 import { createContext, useContext, useReducer } from "react";
-import productsArray from "./../productsArray.js";
 
 const FilterContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "Setup":
+      return {
+        ...state,
+        items: action.payload,
+      };
     case "Low to High":
       return {
         ...state,
@@ -99,7 +103,7 @@ const reducer = (state, action) => {
 
 const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
-    items: productsArray,
+    items: [],
     categoryFiltersFlag: false,
     checkedCount: 0,
   });

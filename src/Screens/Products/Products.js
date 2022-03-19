@@ -23,6 +23,12 @@ function Products(props) {
 
   const { state, dispatch } = useFilter();
 
+  useEffect(() => {
+    fetch("/api/products", { method: "GET" })
+      .then((res) => res.json())
+      .then((json) => dispatch({ type: "Setup", payload: json.products }));
+  }, []);
+
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
   const { cartArray, setCartArray, wishlistArray, setWishlistArray } =
@@ -229,11 +235,11 @@ function Products(props) {
         </div>{" "}
         <div className="landing-page-content">
           {props.productPage &&
-            state.items.map((product, index) => {
+            state.items.map((product) => {
               return (
                 product.show && (
                   <Card
-                    key={index}
+                    key={product.id}
                     bookCover={product.bookCover}
                     bookTitle={product.bookTitle}
                     bookAuthor={product.bookAuthor}
