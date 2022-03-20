@@ -12,7 +12,7 @@ function Authenticate(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleAuth = () => {
-    const payload = {
+    var payload = {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
@@ -29,7 +29,9 @@ function Authenticate(props) {
         .then((res) => res.json())
         .then((data) => {
           if (!data.errors) {
-            console.log(data);
+            emailRef.current.value = "";
+            passwordRef.current.value = "";
+            localStorage.setItem("ENCODED_TOKEN", data.encodedToken);
             navigate(-1);
           }
         });
@@ -45,7 +47,9 @@ function Authenticate(props) {
         .then((res) => res.json())
         .then((data) => {
           if (!data.errors) {
-            console.log(data);
+            emailRef.current.value = "";
+            passwordRef.current.value = "";
+            localStorage.setItem("ENCODED_TOKEN", data.encodedToken);
             navigate(-1);
           }
         });
