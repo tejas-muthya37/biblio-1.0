@@ -35,6 +35,8 @@ function Products(props) {
   const { cartArray, setCartArray, wishlistArray, setWishlistArray } =
     useProducts();
 
+  const encodedToken = localStorage.getItem("ENCODED_TOKEN");
+
   const addToCart = (product) => {
     var productFlag = false;
     cartArray.map((cartItem, index) => {
@@ -50,6 +52,17 @@ function Products(props) {
     });
     if (productFlag === false) setCartArray([...cartArray, product]);
     toggleToast("Added To Cart ✔", "green", "whitesmoke");
+
+    fetch("/api/user/cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: encodedToken,
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   const addToWishlist = (product) => {
