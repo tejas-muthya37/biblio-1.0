@@ -1,9 +1,15 @@
 import "./authenticate.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import Navbar from "./../../Components/Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function Authenticate(props) {
+  let navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleAuth = () => {
     const payload = {
@@ -16,25 +22,38 @@ function Authenticate(props) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(payload),
       })
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          if (!data.errors) {
+            console.log(data);
+            navigate(-1);
+          }
+        });
     } else if (props.cardTitle === "SIGN UP") {
       fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(payload),
       })
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          if (!data.errors) {
+            console.log(data);
+            navigate(-1);
+          }
+        });
     }
   };
   return (
     <div className="Authenticate">
+      <Navbar />
       <div className="landing-card">
         <h1>{props.cardTitle}</h1>
         <div className="landing-inputs">
@@ -60,7 +79,9 @@ function Authenticate(props) {
             </div>
           )}
         </div>
-        <button onClick={handleAuth}>Next</button>
+        <Link to={isAuthenticated ? "/books" : "/login"}>
+          <button onClick={handleAuth}>Next</button>
+        </Link>
         <p className="alternate-cta">
           <a href="/">
             {props.alternate} <span>{">"}</span>

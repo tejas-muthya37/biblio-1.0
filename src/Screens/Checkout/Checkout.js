@@ -7,6 +7,7 @@ import Empty from "./../../Components/Empty/Empty";
 import emptyImage from "./../../Media/empty-cart.png";
 import { useToast } from "./../../Context/toast-context";
 import { useAddress } from "./../../Context/address-context";
+import Navbar from "./../../Components/Navbar/Navbar";
 
 function Checkout() {
   const { cartArray } = useProducts();
@@ -202,6 +203,7 @@ function Checkout() {
 
   return (
     <div className="Checkout">
+      <Navbar />
       <p
         style={{
           visibility: toastVisibility,

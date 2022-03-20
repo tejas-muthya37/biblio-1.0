@@ -1,5 +1,4 @@
 import "./App.css";
-import Navbar from "./Components/Navbar/Navbar";
 import Authenticate from "./Screens/Authenticate/Authenticate";
 import Cart from "./Screens/Cart/Cart";
 import Wishlist from "./Screens/Wishlist/Wishlist";
@@ -7,87 +6,66 @@ import Products from "./Screens/Products/Products";
 import Categories from "./Screens/Categories/Categories";
 import Checkout from "./Screens/Checkout/Checkout";
 import Success from "./Screens/Success/Success";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path="/mock">
-            <Mockman />
-          </Route>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/mock" element={<Mockman />} />
 
-          <Route exact path="/">
-            <Navbar />
-            <Categories />
-          </Route>
+          <Route path="/" element={<Categories />} />
 
-          <Route exact path="/login">
-            <Navbar />
-            <Authenticate
-              cardTitle="LOGIN"
-              checkboxLabel="Remember me"
-              alternate="Create a new account"
-            />
-          </Route>
+          <Route
+            path="/login"
+            element={
+              <Authenticate
+                cardTitle="LOGIN"
+                checkboxLabel="Remember me"
+                alternate="Create a new account"
+              />
+            }
+          />
 
-          <Route exact path="/signup">
-            <Navbar />
-            <Authenticate
-              cardTitle="SIGN UP"
-              checkboxLabel="I accept all terms & conditions"
-              alternate="Login with existing account"
-            />
-          </Route>
+          <Route
+            path="/signup"
+            element={
+              <Authenticate
+                cardTitle="SIGN UP"
+                checkboxLabel="I agree to the terms & conditions"
+                alternate="Login with existing account"
+              />
+            }
+          />
 
-          <Route exact path="/books">
-            <Navbar />
-            <Products productPage={true} />
-          </Route>
+          <Route path="/books" element={<Products productPage={true} />} />
 
-          <Route exact path="/books/thrillers">
-            <Navbar />
-            <Products thrillerPage={true} />
-          </Route>
+          <Route
+            path="/books/thrillers"
+            element={<Products thrillerPage={true} />}
+          />
 
-          <Route exact path="/books/drama">
-            <Navbar />
-            <Products dramaPage={true} />
-          </Route>
+          <Route path="/books/drama" element={<Products dramaPage={true} />} />
 
-          <Route exact path="/books/sci-fi">
-            <Navbar />
-            <Products scifiPage={true} />
-          </Route>
+          <Route path="/books/sci-fi" element={<Products scifiPage={true} />} />
 
-          <Route exact path="/books/romance">
-            <Navbar />
-            <Products romancePage={true} />
-          </Route>
+          <Route
+            path="/books/romance"
+            element={<Products romancePage={true} />}
+          />
 
-          <Route exact path="/cart">
-            <Navbar />
-            <Cart />
-          </Route>
+          <Route path="/cart" element={<Cart />} />
 
-          <Route exact path="/wishlist">
-            <Navbar />
-            <Wishlist />
-          </Route>
+          <Route path="/wishlist" element={<Wishlist />} />
 
-          <Route exact path="/checkout">
-            <Navbar />
-            <Checkout />
-          </Route>
+          <Route path="/checkout" element={<Checkout />} />
 
-          <Route exact path="/success">
-            <Success />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          <Route path="/success" element={<Success />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

@@ -5,6 +5,7 @@ import { useProducts } from "./../../Context/products-context";
 import Empty from "./../../Components/Empty/Empty";
 import emptyImage from "./../../Media/empty-cart.png";
 import { useToast } from "./../../Context/toast-context";
+import Navbar from "./../../Components/Navbar/Navbar";
 
 function Wishlist() {
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
@@ -46,6 +47,7 @@ function Wishlist() {
 
   return (
     <div className="Wishlist">
+      <Navbar />
       <p
         style={{
           visibility: toastVisibility,

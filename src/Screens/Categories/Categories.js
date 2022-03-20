@@ -4,10 +4,12 @@ import category2 from "./../../Media/category-2.jpg";
 import category3 from "./../../Media/category-3.jpg";
 import category4 from "./../../Media/category-4.jpg";
 import { Link } from "react-router-dom";
+import Navbar from "./../../Components/Navbar/Navbar";
 
 function Categories() {
   return (
     <div className="Categories">
+      <Navbar />
       <div className="landing-page-container categories">
         <div className="landing-page-content categories">
           <Link to="/books/thrillers">

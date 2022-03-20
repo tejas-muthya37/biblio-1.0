@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useProducts } from "./../../Context/products-context";
 import { useToast } from "./../../Context/toast-context";
 import { useFilter } from "./../../Context/filter-context";
+import Navbar from "./../../Components/Navbar/Navbar";
 
 function Products(props) {
   const inputRef = useRef(null);
@@ -73,6 +74,7 @@ function Products(props) {
 
   return (
     <div className="Products">
+      <Navbar />
       <p
         style={{
           visibility: toastVisibility,
@@ -256,7 +258,7 @@ function Products(props) {
 
           {props.thrillerPage &&
             state.items
-              .filter((item) => item.bookCategory === "Thriller")
+              .filter((item) => item.categoryName === "Thriller")
               .map((product, index) => {
                 return (
                   product.show && (
@@ -278,7 +280,7 @@ function Products(props) {
 
           {props.dramaPage &&
             state.items
-              .filter((item) => item.bookCategory === "Drama")
+              .filter((item) => item.categoryName === "Drama")
               .map((product, index) => {
                 return (
                   product.show && (
@@ -300,7 +302,7 @@ function Products(props) {
 
           {props.scifiPage &&
             state.items
-              .filter((item) => item.bookCategory === "Scifi")
+              .filter((item) => item.categoryName === "Scifi")
               .map((product, index) => {
                 return (
                   product.show && (
@@ -322,7 +324,7 @@ function Products(props) {
 
           {props.romancePage &&
             state.items
-              .filter((item) => item.bookCategory === "Romance")
+              .filter((item) => item.categoryName === "Romance")
               .map((product, index) => {
                 return (
                   product.show && (
