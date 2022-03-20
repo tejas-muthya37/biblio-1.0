@@ -1,6 +1,5 @@
 import "./authenticate.css";
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useRef } from "react";
 import Navbar from "./../../Components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 
@@ -8,8 +7,6 @@ function Authenticate(props) {
   let navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleAuth = () => {
     var payload = {
@@ -83,9 +80,7 @@ function Authenticate(props) {
             </div>
           )}
         </div>
-        <Link to={isAuthenticated ? "/books" : "/login"}>
-          <button onClick={handleAuth}>Next</button>
-        </Link>
+        <button onClick={handleAuth}>Next</button>
         <p className="alternate-cta">
           <a href="/">
             {props.alternate} <span>{">"}</span>
