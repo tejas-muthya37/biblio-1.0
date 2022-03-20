@@ -9,6 +9,8 @@ import { useToast } from "./../../Context/toast-context";
 import Navbar from "./../../Components/Navbar/Navbar";
 
 function Cart() {
+  const encodedToken = localStorage.getItem("ENCODED_TOKEN");
+
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
   const { cartArray, setCartArray, wishlistArray, setWishlistArray } =
@@ -17,6 +19,17 @@ function Cart() {
   const removeFromCart = (id) => {
     setCartArray(cartArray.filter((cartItem) => cartItem.id !== id));
     toggleToast("Removed From Cart ✔", "red", "whitesmoke");
+
+    fetch(`/api/user/cart/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        authorization: encodedToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   const moveToWishlist = (product) => {
