@@ -78,6 +78,17 @@ function Products(props) {
       setWishlistArray([...wishlistArray, product]);
     }
     toggleToast("Added To Wishlist ✔", "green", "whitesmoke");
+
+    fetch("/api/user/wishlist", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: encodedToken,
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   useEffect(() => {
