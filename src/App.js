@@ -1,6 +1,6 @@
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
-// import Authenticate from "./Screens/Authenticate/Authenticate";
+import Authenticate from "./Screens/Authenticate/Authenticate";
 import Cart from "./Screens/Cart/Cart";
 import Wishlist from "./Screens/Wishlist/Wishlist";
 import Products from "./Screens/Products/Products";
@@ -18,9 +18,28 @@ function App() {
           <Route exact path="/mock">
             <Mockman />
           </Route>
+
           <Route exact path="/">
             <Navbar />
             <Categories />
+          </Route>
+
+          <Route exact path="/login">
+            <Navbar />
+            <Authenticate
+              cardTitle="LOGIN"
+              checkboxLabel="Remember me"
+              alternate="Create a new account"
+            />
+          </Route>
+
+          <Route exact path="/signup">
+            <Navbar />
+            <Authenticate
+              cardTitle="SIGN UP"
+              checkboxLabel="I accept all terms & conditions"
+              alternate="Login with existing account"
+            />
           </Route>
 
           <Route exact path="/books">
