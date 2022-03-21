@@ -13,14 +13,8 @@ function Cart() {
 
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
-  const {
-    stateCart,
-    dispatchCart,
-    cartArray,
-    setCartArray,
-    wishlistArray,
-    setWishlistArray,
-  } = useProducts();
+  const { cartArray, setCartArray, wishlistArray, setWishlistArray } =
+    useProducts();
 
   const removeFromCart = (id) => {
     setCartArray(cartArray.filter((cartItem) => cartItem._id !== id));
@@ -145,19 +139,6 @@ function Cart() {
     localStorage.setItem("CART_ARRAY", JSON.stringify(cartArray));
     localStorage.setItem("WISHLIST_ARRAY", JSON.stringify(wishlistArray));
   }, [cartArray, wishlistArray]);
-
-  useEffect(() => {
-    fetch("/api/user/cart", {
-      method: "GET",
-      headers: {
-        "Application-Type": "application/json",
-        Accept: "application/json",
-        authorization: encodedToken,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => dispatchCart({ type: "Setup", payload: data.cart }));
-  }, []);
 
   return (
     <div className="Cart">

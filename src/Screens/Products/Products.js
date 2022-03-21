@@ -6,8 +6,10 @@ import { useToast } from "./../../Context/toast-context";
 import { useFilter } from "./../../Context/filter-context";
 import Navbar from "./../../Components/Navbar/Navbar";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 function Products(props) {
+  let navigate = useNavigate();
   let { categoryName } = useParams();
   const inputRef = useRef(null);
 
@@ -43,12 +45,6 @@ function Products(props) {
     var productFlag = false;
     cartArray.map((cartItem, index) => {
       if (cartItem._id === product._id) {
-        productFlag = true;
-        setCartArray([
-          ...cartArray.slice(0, index),
-          { ...cartArray[index], bookQuantity: cartItem.bookQuantity + 1 },
-          ...cartArray.slice(index + 1),
-        ]);
         fetch(`/api/user/cart/${product._id}`, {
           method: "POST",
           headers: {
@@ -59,12 +55,27 @@ function Products(props) {
           body: JSON.stringify({ action: { type: "increment" } }),
         })
           .then((res) => res.json())
-          .then((data) => console.log(data));
+          .then((data) => {
+            console.log(data);
+            if (!data.message) {
+              productFlag = true;
+              setCartArray([
+                ...cartArray.slice(0, index),
+                {
+                  ...cartArray[index],
+                  bookQuantity: cartItem.bookQuantity + 1,
+                },
+                ...cartArray.slice(index + 1),
+              ]);
+              toggleToast("Added To Cart ✔", "green", "whitesmoke");
+            } else {
+              navigate("/login");
+            }
+          });
       }
       return true;
     });
     if (productFlag === false) {
-      setCartArray([...cartArray, product]);
       fetch("/api/user/cart", {
         method: "POST",
         headers: {
@@ -74,25 +85,20 @@ function Products(props) {
         body: JSON.stringify({ product }),
       })
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          console.log(data);
+          if (!data.message) {
+            setCartArray([...cartArray, product]);
+            toggleToast("Added To Cart ✔", "green", "whitesmoke");
+          } else {
+            navigate("/login");
+          }
+        });
     }
-    toggleToast("Added To Cart ✔", "green", "whitesmoke");
   };
 
   const addToWishlist = (product) => {
     var wishlistFlag = false;
-    wishlistArray.map((wishlistItem) => {
-      if (wishlistItem._id === product._id) {
-        wishlistFlag = true;
-        return true;
-      }
-      return true;
-    });
-    if (wishlistFlag === false) {
-      setWishlistArray([...wishlistArray, product]);
-    }
-    toggleToast("Added To Wishlist ✔", "green", "whitesmoke");
-
     fetch("/api/user/wishlist", {
       method: "POST",
       headers: {
@@ -102,7 +108,24 @@ function Products(props) {
       body: JSON.stringify({ product }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        if (!data.message) {
+          wishlistArray.map((wishlistItem) => {
+            if (wishlistItem._id === product._id) {
+              wishlistFlag = true;
+              return true;
+            }
+            return true;
+          });
+          if (wishlistFlag === false) {
+            setWishlistArray([...wishlistArray, product]);
+            toggleToast("Added To Wishlist ✔", "green", "whitesmoke");
+          }
+        } else {
+          navigate("/login");
+        }
+      });
   };
 
   useEffect(() => {

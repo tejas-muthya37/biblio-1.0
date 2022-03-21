@@ -2,20 +2,25 @@ import { createContext, useContext, useState, useReducer } from "react";
 
 const ProductsContext = createContext();
 
-const reducer = (stateCart, action) => {
+const reducer = (stateMockbee, action) => {
   switch (action.type) {
-    case "Setup":
+    case "Cart setup":
       return {
-        ...stateCart,
+        ...stateMockbee,
         cart: action.payload,
       };
+    case "Wishlist setup":
+      return {
+        ...stateMockbee,
+        wishlist: action.payload,
+      };
     default:
-      return stateCart;
+      return stateMockbee;
   }
 };
 
 const ProductsProvider = ({ children }) => {
-  const [stateCart, dispatchCart] = useReducer(reducer, {
+  const [stateMockbee, dispatchMockbee] = useReducer(reducer, {
     cart: [],
     wishlist: [],
   });
@@ -31,8 +36,8 @@ const ProductsProvider = ({ children }) => {
   return (
     <ProductsContext.Provider
       value={{
-        stateCart,
-        dispatchCart,
+        stateMockbee,
+        dispatchMockbee,
         cartArray,
         setCartArray,
         wishlistArray,
