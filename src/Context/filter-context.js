@@ -45,7 +45,7 @@ const reducer = (state, action) => {
     case "Category filter":
       if (state.categoryFiltersFlag === false) {
         state.items.map((item) => {
-          item.bookCategory === action.payload.id
+          item.categoryName === action.payload.id
             ? (item.show = true)
             : (item.show = false);
           return true;
@@ -58,7 +58,7 @@ const reducer = (state, action) => {
       } else {
         if (action.payload.checked) {
           state.items.map((item) => {
-            if (item.bookCategory === action.payload.id) {
+            if (item.categoryName === action.payload.id) {
               item.show = true;
             }
             return true;
@@ -78,7 +78,7 @@ const reducer = (state, action) => {
             };
           } else {
             state.items.map((item) => {
-              if (item.bookCategory === action.payload.id) item.show = false;
+              if (item.categoryName === action.payload.id) item.show = false;
               return true;
             });
             return {
