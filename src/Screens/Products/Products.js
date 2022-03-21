@@ -49,22 +49,34 @@ function Products(props) {
           { ...cartArray[index], bookQuantity: cartItem.bookQuantity + 1 },
           ...cartArray.slice(index + 1),
         ]);
+        fetch(`/api/user/cart/${product._id}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            authorization: encodedToken,
+          },
+          body: JSON.stringify({ action: { type: "increment" } }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
       }
       return true;
     });
-    if (productFlag === false) setCartArray([...cartArray, product]);
+    if (productFlag === false) {
+      setCartArray([...cartArray, product]);
+      fetch("/api/user/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: encodedToken,
+        },
+        body: JSON.stringify({ product }),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    }
     toggleToast("Added To Cart ✔", "green", "whitesmoke");
-
-    fetch("/api/user/cart", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: encodedToken,
-      },
-      body: JSON.stringify({ product }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
   };
 
   const addToWishlist = (product) => {
