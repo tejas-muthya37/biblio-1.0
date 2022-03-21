@@ -7,14 +7,22 @@ import Empty from "./../../Components/Empty/Empty";
 import emptyImage from "./../../Media/empty-cart.png";
 import { useToast } from "./../../Context/toast-context";
 import Navbar from "./../../Components/Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+  let navigate = useNavigate();
+
   const encodedToken = localStorage.getItem("ENCODED_TOKEN");
 
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
-  const { cartArray, setCartArray, wishlistArray, setWishlistArray } =
-    useProducts();
+  const {
+    dispatchMockbee,
+    cartArray,
+    setCartArray,
+    wishlistArray,
+    setWishlistArray,
+  } = useProducts();
 
   const removeFromCart = (id) => {
     setCartArray(cartArray.filter((cartItem) => cartItem._id !== id));
@@ -139,6 +147,23 @@ function Cart() {
     localStorage.setItem("CART_ARRAY", JSON.stringify(cartArray));
     localStorage.setItem("WISHLIST_ARRAY", JSON.stringify(wishlistArray));
   }, [cartArray, wishlistArray]);
+
+  useEffect(() => {
+    fetch("/api/user/cart", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        authorization: encodedToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          navigate("/login");
+        }
+      });
+  }, []);
 
   return (
     <div className="Cart">
