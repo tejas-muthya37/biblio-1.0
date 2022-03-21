@@ -65,6 +65,17 @@ function Cart() {
       }
       return true;
     });
+    fetch(`/api/user/cart/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        authorization: encodedToken,
+      },
+      body: JSON.stringify({ action: { type: "increment" } }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   const decrementCartItemQuantity = (id) => {
@@ -82,6 +93,17 @@ function Cart() {
       }
       return true;
     });
+    fetch(`/api/user/cart/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        authorization: encodedToken,
+      },
+      body: JSON.stringify({ action: { type: "decrement" } }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   const cartTotal = cartArray.reduce((accumulator, currentValue) => {
