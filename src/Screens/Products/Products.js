@@ -5,8 +5,10 @@ import { useProducts } from "./../../Context/products-context";
 import { useToast } from "./../../Context/toast-context";
 import { useFilter } from "./../../Context/filter-context";
 import Navbar from "./../../Components/Navbar/Navbar";
+import { useParams } from "react-router";
 
 function Products(props) {
+  let { categoryName } = useParams();
   const inputRef = useRef(null);
 
   const inputs = document.querySelectorAll('input:not([type="text"])');
@@ -280,93 +282,26 @@ function Products(props) {
               );
             })}
 
-          {props.thrillerPage &&
-            state.items
-              .filter((item) => item.categoryName === "Thriller")
-              .map((product, index) => {
-                return (
-                  product.show && (
-                    <Card
-                      key={index}
-                      bookCover={product.bookCover}
-                      bookTitle={product.bookTitle}
-                      bookAuthor={product.bookAuthor}
-                      bookPrice={product.bookPrice}
-                      actionOne={product.actionOne}
-                      actionTwo={product.actionTwo}
-                      actionOneFunction={() => addToCart(product)}
-                      actionTwoFunction={() => addToWishlist(product)}
-                      bookQuantity={1}
-                    />
-                  )
-                );
-              })}
-
-          {props.dramaPage &&
-            state.items
-              .filter((item) => item.categoryName === "Drama")
-              .map((product, index) => {
-                return (
-                  product.show && (
-                    <Card
-                      key={index}
-                      bookCover={product.bookCover}
-                      bookTitle={product.bookTitle}
-                      bookAuthor={product.bookAuthor}
-                      bookPrice={product.bookPrice}
-                      actionOne={product.actionOne}
-                      actionTwo={product.actionTwo}
-                      actionOneFunction={() => addToCart(product)}
-                      actionTwoFunction={() => addToWishlist(product)}
-                      bookQuantity={1}
-                    />
-                  )
-                );
-              })}
-
-          {props.scifiPage &&
-            state.items
-              .filter((item) => item.categoryName === "Scifi")
-              .map((product, index) => {
-                return (
-                  product.show && (
-                    <Card
-                      key={index}
-                      bookCover={product.bookCover}
-                      bookTitle={product.bookTitle}
-                      bookAuthor={product.bookAuthor}
-                      bookPrice={product.bookPrice}
-                      actionOne={product.actionOne}
-                      actionTwo={product.actionTwo}
-                      actionOneFunction={() => addToCart(product)}
-                      actionTwoFunction={() => addToWishlist(product)}
-                      bookQuantity={1}
-                    />
-                  )
-                );
-              })}
-
-          {props.romancePage &&
-            state.items
-              .filter((item) => item.categoryName === "Romance")
-              .map((product, index) => {
-                return (
-                  product.show && (
-                    <Card
-                      key={index}
-                      bookCover={product.bookCover}
-                      bookTitle={product.bookTitle}
-                      bookAuthor={product.bookAuthor}
-                      bookPrice={product.bookPrice}
-                      actionOne={product.actionOne}
-                      actionTwo={product.actionTwo}
-                      actionOneFunction={() => addToCart(product)}
-                      actionTwoFunction={() => addToWishlist(product)}
-                      bookQuantity={1}
-                    />
-                  )
-                );
-              })}
+          {state.items
+            .filter((item) => item.categoryName === categoryName)
+            .map((product, index) => {
+              return (
+                product.show && (
+                  <Card
+                    key={index}
+                    bookCover={product.bookCover}
+                    bookTitle={product.bookTitle}
+                    bookAuthor={product.bookAuthor}
+                    bookPrice={product.bookPrice}
+                    actionOne={product.actionOne}
+                    actionTwo={product.actionTwo}
+                    actionOneFunction={() => addToCart(product)}
+                    actionTwoFunction={() => addToWishlist(product)}
+                    bookQuantity={1}
+                  />
+                )
+              );
+            })}
         </div>{" "}
       </div>{" "}
     </div>

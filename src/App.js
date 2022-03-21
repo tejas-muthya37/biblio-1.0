@@ -42,19 +42,7 @@ function App() {
 
           <Route path="/books" element={<Products productPage={true} />} />
 
-          <Route
-            path="/books/thrillers"
-            element={<Products thrillerPage={true} />}
-          />
-
-          <Route path="/books/drama" element={<Products dramaPage={true} />} />
-
-          <Route path="/books/sci-fi" element={<Products scifiPage={true} />} />
-
-          <Route
-            path="/books/romance"
-            element={<Products romancePage={true} />}
-          />
+          <Route path="/books/:categoryName" element={<Products />} />
 
           <Route path="/cart" element={<Cart />} />
 

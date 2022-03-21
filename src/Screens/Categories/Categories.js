@@ -12,25 +12,25 @@ function Categories() {
       <Navbar />
       <div className="landing-page-container categories">
         <div className="landing-page-content categories">
-          <Link to="/books/thrillers">
+          <Link to="/books/Thriller">
             <div id="thriller-category" className="category-card">
               <img src={category1} alt="" />
               <p>Thriller</p>
             </div>
           </Link>
-          <Link to="/books/drama">
+          <Link to="/books/Drama">
             <div id="drama-category" className="category-card">
               <img src={category2} alt="" />
               <p>Drama</p>
             </div>
           </Link>
-          <Link to="/books/sci-fi">
+          <Link to="/books/Scifi">
             <div id="scifi-category" className="category-card">
               <img src={category3} alt="" />
               <p>Sci-Fi</p>
             </div>
           </Link>
-          <Link to="/books/romance">
+          <Link to="/books/Romance">
             <div id="romance-category" className="category-card">
               <img src={category4} alt="" />
               <p>Romance</p>
