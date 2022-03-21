@@ -2,8 +2,10 @@ import "./authenticate.css";
 import { useRef } from "react";
 import Navbar from "./../../Components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import { useNavbar } from "./../../Context/navbar-context";
 
 function Authenticate(props) {
+  const { setNavbarButtonText } = useNavbar();
   let navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -29,6 +31,7 @@ function Authenticate(props) {
             emailRef.current.value = "";
             passwordRef.current.value = "";
             localStorage.setItem("ENCODED_TOKEN", data.encodedToken);
+            setNavbarButtonText("Logout");
             navigate(-1);
           }
         });
@@ -47,6 +50,7 @@ function Authenticate(props) {
             emailRef.current.value = "";
             passwordRef.current.value = "";
             localStorage.setItem("ENCODED_TOKEN", data.encodedToken);
+            setNavbarButtonText("Logout");
             navigate(-1);
           }
         });

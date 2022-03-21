@@ -3,9 +3,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link } from "react-router-dom";
 import { useProducts } from "./../../Context/products-context";
+import { useNavbar } from "./../../Context/navbar-context";
 
 function Navbar() {
   const { cartArray, wishlistArray } = useProducts();
+
+  const { navbarButtonText, setNavbarButtonText } = useNavbar();
 
   const handleNavbar = () => {
     const items = document.querySelectorAll(".nav-items li");
@@ -13,6 +16,16 @@ function Navbar() {
     items.forEach((item) => {
       item.style.animation = "";
     });
+  };
+
+  const handleLogout = () => {
+    if (navbarButtonText === "Logout") {
+      localStorage.removeItem("ENCODED_TOKEN");
+      localStorage.removeItem("SAVED_ADDRESSES");
+      localStorage.removeItem("CART_ARRAY");
+      localStorage.removeItem("WISHLIST_ARRAY");
+    }
+    setNavbarButtonText("Login");
   };
 
   function handleClick() {
@@ -40,8 +53,10 @@ function Navbar() {
         </div>
 
         <div className="nav-items">
-          <li>
-            <button>Login</button>
+          <li onClick={handleLogout}>
+            <Link to={navbarButtonText === "Login" ? "/login" : "/books"}>
+              <button>{navbarButtonText}</button>
+            </Link>
           </li>
           <li>
             <div onClick={handleNavbar} className="nav-wishlist-mobile">
