@@ -42,7 +42,7 @@ function Products(props) {
   const addToCart = (product) => {
     var productFlag = false;
     cartArray.map((cartItem, index) => {
-      if (cartItem.id === product.id) {
+      if (cartItem._id === product._id) {
         productFlag = true;
         setCartArray([
           ...cartArray.slice(0, index),
@@ -70,7 +70,7 @@ function Products(props) {
   const addToWishlist = (product) => {
     var wishlistFlag = false;
     wishlistArray.map((wishlistItem) => {
-      if (wishlistItem.id === product.id) {
+      if (wishlistItem._id === product._id) {
         wishlistFlag = true;
         return true;
       }

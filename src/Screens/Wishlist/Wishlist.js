@@ -17,7 +17,7 @@ function Wishlist() {
   const moveToCart = (product) => {
     var productFlag = false;
     cartArray.map((cartItem, index) => {
-      if (cartItem.id === product.id) {
+      if (cartItem._id === product._id) {
         productFlag = true;
         setCartArray([
           ...cartArray.slice(0, index),
@@ -30,13 +30,13 @@ function Wishlist() {
     if (productFlag === false) setCartArray([...cartArray, product]);
     toggleToast("Moved To Cart ✔", "green", "whitesmoke");
     setWishlistArray(
-      wishlistArray.filter((wishlistItem) => wishlistItem.id !== product.id)
+      wishlistArray.filter((wishlistItem) => wishlistItem._id !== product._id)
     );
   };
 
   const removeFromWishlist = (id) => {
     setWishlistArray(
-      wishlistArray.filter((wishlistItem) => wishlistItem.id !== id)
+      wishlistArray.filter((wishlistItem) => wishlistItem._id !== id)
     );
     toggleToast("Removed From Wishlist ✔", "red", "whitesmoke");
 

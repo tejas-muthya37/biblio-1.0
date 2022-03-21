@@ -23,7 +23,7 @@ function Cart() {
   } = useProducts();
 
   const removeFromCart = (id) => {
-    setCartArray(cartArray.filter((cartItem) => cartItem.id !== id));
+    setCartArray(cartArray.filter((cartItem) => cartItem._id !== id));
     toggleToast("Removed From Cart ✔", "red", "whitesmoke");
 
     fetch(`/api/user/cart/${id}`, {
@@ -41,7 +41,7 @@ function Cart() {
   const moveToWishlist = (product) => {
     var wishlistFlag = false;
     wishlistArray.map((wishlistItem) => {
-      if (wishlistItem.id === product.id) {
+      if (wishlistItem._id === product._id) {
         wishlistFlag = true;
         return true;
       }
@@ -51,12 +51,12 @@ function Cart() {
       setWishlistArray([...wishlistArray, product]);
     }
     toggleToast("Moved To Wishlist ✔", "green", "whitesmoke");
-    setCartArray(cartArray.filter((cartItem) => cartItem.id !== product.id));
+    setCartArray(cartArray.filter((cartItem) => cartItem._id !== product._id));
   };
 
   const incrementCartItemQuantity = (id) => {
     cartArray.map((cartItem, index) => {
-      if (cartItem.id === id) {
+      if (cartItem._id === id) {
         setCartArray([
           ...cartArray.slice(0, index),
           { ...cartArray[index], bookQuantity: cartItem.bookQuantity + 1 },
@@ -69,7 +69,7 @@ function Cart() {
 
   const decrementCartItemQuantity = (id) => {
     cartArray.map((cartItem, index) => {
-      if (cartItem.id === id) {
+      if (cartItem._id === id) {
         setCartArray([
           ...cartArray.slice(0, index),
           {
@@ -131,7 +131,7 @@ function Cart() {
       {cartArray.length > 0 && (
         <div className="landing-page-container cart">
           <div className="landing-page-content cart">
-            {stateCart.cart.map((product) => {
+            {cartArray.map((product) => {
               return (
                 <Card
                   key={product._id}
@@ -145,10 +145,10 @@ function Cart() {
                   actionOneFunction={() => moveToWishlist(product)}
                   actionTwoFunction={() => removeFromCart(product._id)}
                   incrementCartItemQuantity={() =>
-                    incrementCartItemQuantity(product.id)
+                    incrementCartItemQuantity(product._id)
                   }
                   decrementCartItemQuantity={() =>
-                    decrementCartItemQuantity(product.id)
+                    decrementCartItemQuantity(product._id)
                   }
                   cartPage={true}
                 />
