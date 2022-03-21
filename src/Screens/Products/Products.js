@@ -284,11 +284,11 @@ function Products(props) {
 
           {state.items
             .filter((item) => item.categoryName === categoryName)
-            .map((product, index) => {
+            .map((product) => {
               return (
                 product.show && (
                   <Card
-                    key={index}
+                    key={product._id}
                     bookCover={product.bookCover}
                     bookTitle={product.bookTitle}
                     bookAuthor={product.bookAuthor}

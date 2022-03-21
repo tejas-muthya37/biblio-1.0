@@ -13,8 +13,14 @@ function Cart() {
 
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
-  const { cartArray, setCartArray, wishlistArray, setWishlistArray } =
-    useProducts();
+  const {
+    stateCart,
+    dispatchCart,
+    cartArray,
+    setCartArray,
+    wishlistArray,
+    setWishlistArray,
+  } = useProducts();
 
   const removeFromCart = (id) => {
     setCartArray(cartArray.filter((cartItem) => cartItem.id !== id));
@@ -95,6 +101,19 @@ function Cart() {
     localStorage.setItem("WISHLIST_ARRAY", JSON.stringify(wishlistArray));
   }, [cartArray, wishlistArray]);
 
+  useEffect(() => {
+    fetch("/api/user/cart", {
+      method: "GET",
+      headers: {
+        "Application-Type": "application/json",
+        Accept: "application/json",
+        authorization: encodedToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => dispatchCart({ type: "Setup", payload: data.cart }));
+  }, []);
+
   return (
     <div className="Cart">
       <Navbar />
@@ -112,10 +131,10 @@ function Cart() {
       {cartArray.length > 0 && (
         <div className="landing-page-container cart">
           <div className="landing-page-content cart">
-            {cartArray.map((product, index) => {
+            {cartArray.map((product) => {
               return (
                 <Card
-                  key={index}
+                  key={product._id}
                   bookCover={product.bookCover}
                   bookTitle={product.bookTitle}
                   bookAuthor={product.bookAuthor}
