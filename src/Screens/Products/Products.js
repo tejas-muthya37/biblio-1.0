@@ -32,7 +32,7 @@ function Products(props) {
     fetch("/api/products", { method: "GET" })
       .then((res) => res.json())
       .then((json) => dispatch({ type: "Setup", payload: json.products }));
-  }, []);
+  }, [dispatch]);
 
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
@@ -58,6 +58,7 @@ function Products(props) {
           .then((data) => {
             console.log(data);
             if (!data.message) {
+              toggleToast("Added To Cart ✔", "green", "whitesmoke");
               productFlag = true;
               setCartArray([
                 ...cartArray.slice(0, index),
@@ -67,7 +68,6 @@ function Products(props) {
                 },
                 ...cartArray.slice(index + 1),
               ]);
-              toggleToast("Added To Cart ✔", "green", "whitesmoke");
             } else {
               navigate("/login");
             }
@@ -119,8 +119,8 @@ function Products(props) {
             return true;
           });
           if (wishlistFlag === false) {
-            setWishlistArray([...wishlistArray, product]);
             toggleToast("Added To Wishlist ✔", "green", "whitesmoke");
+            setWishlistArray([...wishlistArray, product]);
           }
         } else {
           navigate("/login");

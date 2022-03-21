@@ -1,29 +1,8 @@
-import { createContext, useContext, useState, useReducer } from "react";
+import { createContext, useContext, useState } from "react";
 
 const ProductsContext = createContext();
 
-const reducer = (stateMockbee, action) => {
-  switch (action.type) {
-    case "Cart setup":
-      return {
-        ...stateMockbee,
-        cart: action.payload,
-      };
-    case "Wishlist setup":
-      return {
-        ...stateMockbee,
-        wishlist: action.payload,
-      };
-    default:
-      return stateMockbee;
-  }
-};
-
 const ProductsProvider = ({ children }) => {
-  const [stateMockbee, dispatchMockbee] = useReducer(reducer, {
-    cart: [],
-    wishlist: [],
-  });
   var storedCartArray = JSON.parse(localStorage.getItem("CART_ARRAY"));
   if (storedCartArray === null) storedCartArray = [];
 
@@ -36,8 +15,6 @@ const ProductsProvider = ({ children }) => {
   return (
     <ProductsContext.Provider
       value={{
-        stateMockbee,
-        dispatchMockbee,
         cartArray,
         setCartArray,
         wishlistArray,

@@ -4,8 +4,28 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link } from "react-router-dom";
 import { useProducts } from "./../../Context/products-context";
 import { useNavbar } from "./../../Context/navbar-context";
+import { useEffect } from "react";
 
 function Navbar() {
+  const encodedToken = localStorage.getItem("ENCODED_TOKEN");
+
+  const { isAuthenticated, setIsAuthenticated } = useNavbar();
+
+  useEffect(() => {
+    fetch("/api/user/cart", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        authorization: encodedToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.message) setIsAuthenticated(true);
+      });
+  }, []);
+
   const { cartArray, setCartArray, setWishlistArray, wishlistArray } =
     useProducts();
 
@@ -64,7 +84,9 @@ function Navbar() {
           <li>
             <div onClick={handleNavbar} className="nav-wishlist-mobile">
               <div>
-                <Link to="/wishlist">My Wishlist</Link>
+                <Link to={isAuthenticated === true ? "/wishlist" : "/login"}>
+                  My Wishlist
+                </Link>
               </div>
               <span>
                 (<span className="nav-count">{wishlistArray.length}</span>)
@@ -72,7 +94,7 @@ function Navbar() {
             </div>
             <div className="nav-wishlist">
               <div>
-                <Link to="/wishlist">
+                <Link to={isAuthenticated === true ? "/wishlist" : "/login"}>
                   <FavoriteIcon />
                 </Link>
               </div>
@@ -81,14 +103,16 @@ function Navbar() {
           </li>
           <li>
             <div onClick={handleNavbar} className="nav-cart-mobile">
-              <Link to="/cart">My Cart</Link>
+              <Link to={isAuthenticated === true ? "/cart" : "/login"}>
+                My Cart
+              </Link>
               <span>
                 (<span className="nav-count">{cartArray.length}</span>)
               </span>
             </div>
             <div className="nav-cart">
               <div>
-                <Link to="/cart">
+                <Link to={isAuthenticated === true ? "/cart" : "/login"}>
                   <ShoppingCartIcon />
                 </Link>
               </div>

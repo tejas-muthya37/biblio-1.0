@@ -1,7 +1,7 @@
 import "./authenticate.css";
 import { useRef } from "react";
 import Navbar from "./../../Components/Navbar/Navbar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useNavbar } from "./../../Context/navbar-context";
 
 function Authenticate(props) {
@@ -78,7 +78,7 @@ function Authenticate(props) {
             <input id="checked-checkbox" type="checkbox" />
             <label htmlFor="checked-checkbox">{props.checkboxLabel}</label>
           </div>
-          {props.cardTitle === "Login" && (
+          {props.cardTitle === "LOGIN" && (
             <div>
               <a href="/">Forgot your password?</a>
             </div>
@@ -86,9 +86,9 @@ function Authenticate(props) {
         </div>
         <button onClick={handleAuth}>Next</button>
         <p className="alternate-cta">
-          <a href="/">
+          <Link to={props.cardTitle === "LOGIN" ? "/signup" : "/login"}>
             {props.alternate} <span>{">"}</span>
-          </a>
+          </Link>
         </p>
       </div>
     </div>
