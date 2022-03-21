@@ -10,7 +10,7 @@ function Navbar() {
   const handleNavbar = () => {
     const items = document.querySelectorAll(".nav-items li");
 
-    items.forEach((item, index) => {
+    items.forEach((item) => {
       item.style.animation = "";
     });
   };
