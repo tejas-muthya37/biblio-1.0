@@ -61,7 +61,7 @@ function Products(props) {
         "Content-Type": "application/json",
         authorization: encodedToken,
       },
-      body: JSON.stringify(product),
+      body: JSON.stringify({ product }),
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
@@ -87,7 +87,7 @@ function Products(props) {
         "Content-Type": "application/json",
         authorization: encodedToken,
       },
-      body: JSON.stringify(product),
+      body: JSON.stringify({ product }),
     })
       .then((res) => res.json())
       .then((data) => console.log(data));

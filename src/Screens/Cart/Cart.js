@@ -131,7 +131,7 @@ function Cart() {
       {cartArray.length > 0 && (
         <div className="landing-page-container cart">
           <div className="landing-page-content cart">
-            {cartArray.map((product) => {
+            {stateCart.cart.map((product) => {
               return (
                 <Card
                   key={product._id}
