@@ -267,7 +267,7 @@ function Products(props) {
               return (
                 product.show && (
                   <Card
-                    key={product.id}
+                    key={product._id}
                     bookCover={product.bookCover}
                     bookTitle={product.bookTitle}
                     bookAuthor={product.bookAuthor}

@@ -143,7 +143,7 @@ function Cart() {
                   actionOne="Move To Wishlist"
                   actionTwo="Remove From Cart"
                   actionOneFunction={() => moveToWishlist(product)}
-                  actionTwoFunction={() => removeFromCart(product.id)}
+                  actionTwoFunction={() => removeFromCart(product._id)}
                   incrementCartItemQuantity={() =>
                     incrementCartItemQuantity(product.id)
                   }
