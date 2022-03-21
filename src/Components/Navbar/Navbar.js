@@ -22,7 +22,10 @@ function Navbar() {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (!data.message) setIsAuthenticated(true);
+        if (!data.message) {
+          setIsAuthenticated(true);
+          setNavbarButtonText("Logout");
+        }
       });
   }, []);
 
