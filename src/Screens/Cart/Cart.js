@@ -52,6 +52,29 @@ function Cart() {
     }
     toggleToast("Moved To Wishlist ✔", "green", "whitesmoke");
     setCartArray(cartArray.filter((cartItem) => cartItem._id !== product._id));
+
+    fetch(`/api/user/cart/${product._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        authorization: encodedToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .then(() => {
+        fetch("/api/user/wishlist", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: encodedToken,
+          },
+          body: JSON.stringify({ product }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      });
   };
 
   const incrementCartItemQuantity = (id) => {

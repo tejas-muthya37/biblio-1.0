@@ -32,6 +32,29 @@ function Wishlist() {
     setWishlistArray(
       wishlistArray.filter((wishlistItem) => wishlistItem._id !== product._id)
     );
+
+    fetch(`/api/user/wishlist/${product._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        authorization: encodedToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .then(() => {
+        fetch("/api/user/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: encodedToken,
+          },
+          body: JSON.stringify({ product }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      });
   };
 
   const removeFromWishlist = (id) => {
