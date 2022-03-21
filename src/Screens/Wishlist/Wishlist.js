@@ -87,7 +87,7 @@ function Wishlist() {
                 actionTwo="Remove From Wishlist"
                 actionOneFunction={() => moveToCart(product)}
                 actionTwoFunction={() => {
-                  removeFromWishlist(product.id);
+                  removeFromWishlist(product._id);
                 }}
               />
             );
