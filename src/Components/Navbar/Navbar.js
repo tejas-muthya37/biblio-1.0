@@ -7,6 +7,14 @@ import { useProducts } from "./../../Context/products-context";
 function Navbar() {
   const { cartArray, wishlistArray } = useProducts();
 
+  const handleNavbar = () => {
+    const items = document.querySelectorAll(".nav-items li");
+
+    items.forEach((item, index) => {
+      item.style.animation = "";
+    });
+  };
+
   function handleClick() {
     const burger = document.querySelector(".burger");
     const nav = document.querySelector(".nav-items");
@@ -36,9 +44,9 @@ function Navbar() {
             <button>Login</button>
           </li>
           <li>
-            <div className="nav-wishlist-mobile">
+            <div onClick={handleNavbar} className="nav-wishlist-mobile">
               <div>
-                <a href="/wishlist">My Wishlist</a>
+                <Link to="/wishlist">My Wishlist</Link>
               </div>
               <span>
                 (<span className="nav-count">{wishlistArray.length}</span>)
@@ -54,10 +62,8 @@ function Navbar() {
             </div>
           </li>
           <li>
-            <div className="nav-cart-mobile">
-              <div>
-                <a href="/cart">My Cart</a>
-              </div>
+            <div onClick={handleNavbar} className="nav-cart-mobile">
+              <Link to="/cart">My Cart</Link>
               <span>
                 (<span className="nav-count">{cartArray.length}</span>)
               </span>
