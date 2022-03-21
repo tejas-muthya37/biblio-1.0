@@ -6,7 +6,8 @@ import { useProducts } from "./../../Context/products-context";
 import { useNavbar } from "./../../Context/navbar-context";
 
 function Navbar() {
-  const { cartArray, wishlistArray } = useProducts();
+  const { cartArray, setCartArray, setWishlistArray, wishlistArray } =
+    useProducts();
 
   const { navbarButtonText, setNavbarButtonText } = useNavbar();
 
@@ -24,8 +25,10 @@ function Navbar() {
       localStorage.removeItem("SAVED_ADDRESSES");
       localStorage.removeItem("CART_ARRAY");
       localStorage.removeItem("WISHLIST_ARRAY");
+      setNavbarButtonText("Login");
+      setCartArray([]);
+      setWishlistArray([]);
     }
-    setNavbarButtonText("Login");
   };
 
   function handleClick() {
