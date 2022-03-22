@@ -36,10 +36,14 @@ function Navbar() {
 
   const handleNavbar = () => {
     const items = document.querySelectorAll(".nav-items li");
+    const burger = document.querySelector(".burger");
+    const nav = document.querySelector(".nav-items");
 
+    nav.classList.toggle("navSlide");
     items.forEach((item) => {
       item.style.animation = "";
     });
+    burger.classList.toggle("toggle");
   };
 
   const handleLogout = () => {
@@ -52,6 +56,16 @@ function Navbar() {
       setCartArray([]);
       setWishlistArray([]);
     }
+
+    const items = document.querySelectorAll(".nav-items li");
+    const burger = document.querySelector(".burger");
+    const nav = document.querySelector(".nav-items");
+
+    nav.classList.toggle("navSlide");
+    items.forEach((item) => {
+      item.style.animation = "";
+    });
+    burger.classList.toggle("toggle");
   };
 
   function handleClick() {
