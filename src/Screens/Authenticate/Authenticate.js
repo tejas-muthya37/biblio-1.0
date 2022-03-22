@@ -73,7 +73,10 @@ function Authenticate(props) {
             <input ref={passwordRef} type="password" id="password" />
           </div>
         </div>
-        <div className="secondary-cta-section">
+
+        {/* Implementing this functionality later. */}
+
+        {/* <div className="secondary-cta-section">
           <div className="secondary-cta-checkbox">
             <input id="checked-checkbox" type="checkbox" />
             <label htmlFor="checked-checkbox">{props.checkboxLabel}</label>
@@ -83,7 +86,7 @@ function Authenticate(props) {
               <a href="/">Forgot your password?</a>
             </div>
           )}
-        </div>
+        </div> */}
         <button onClick={handleAuth}>Next</button>
         <p className="alternate-cta">
           <Link to={props.cardTitle === "LOGIN" ? "/signup" : "/login"}>

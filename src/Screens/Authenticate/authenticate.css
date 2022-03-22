@@ -40,7 +40,8 @@
 .landing-inputs .label-with-input {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1.25rem;
+    margin-bottom: 2rem;
+    gap: 0.25rem;
 }
 
 .landing-inputs label {
@@ -85,7 +86,7 @@
     color: whitesmoke;
     font-size: 1.1rem;
     font-weight: 600;
-    margin: 2rem 0;
+    margin-bottom: 2rem;
     cursor: pointer;
 }
 

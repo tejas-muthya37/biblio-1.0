@@ -129,9 +129,11 @@ function Navbar() {
               <span className="nav-count">{cartArray.length}</span>
             </div>
           </li>
-          <li>
+
+          {/* Implementing this functionality later. */}
+          {/* <li>
             <input type="text" placeholder="Search" />
-          </li>
+          </li> */}
         </div>
 
         <div onClick={() => handleClick()} id="burger" className="burger">
