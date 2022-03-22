@@ -25,8 +25,6 @@ function Navbar() {
         if (!data.message) {
           setIsAuthenticated(true);
           setNavbarButtonText("Logout");
-        } else {
-          setIsAuthenticated(false);
         }
       });
   }, []);
@@ -57,6 +55,7 @@ function Navbar() {
       setNavbarButtonText("Login");
       setCartArray([]);
       setWishlistArray([]);
+      setIsAuthenticated(false);
     }
 
     handleNavbar();
