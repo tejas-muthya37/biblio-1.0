@@ -86,10 +86,23 @@ function Navbar() {
         </div>
 
         <div className="nav-items">
-          <li onClick={handleLogout}>
-            <Link to={navbarButtonText === "Login" ? "/login" : "/books"}>
-              <button>{navbarButtonText}</button>
-            </Link>
+          <li>
+            <div onClick={handleNavbar} className="nav-cart-mobile">
+              <Link to={isAuthenticated === true ? "/cart" : "/login"}>
+                My Cart
+              </Link>
+              <span>
+                (<span className="nav-count">{cartArray.length}</span>)
+              </span>
+            </div>
+            <div className="nav-cart">
+              <div>
+                <Link to={isAuthenticated === true ? "/cart" : "/login"}>
+                  <ShoppingCartIcon />
+                </Link>
+              </div>
+              <span className="nav-count">{cartArray.length}</span>
+            </div>
           </li>
           <li>
             <div onClick={handleNavbar} className="nav-wishlist-mobile">
@@ -111,25 +124,11 @@ function Navbar() {
               <span className="nav-count">{wishlistArray.length}</span>
             </div>
           </li>
-          <li>
-            <div onClick={handleNavbar} className="nav-cart-mobile">
-              <Link to={isAuthenticated === true ? "/cart" : "/login"}>
-                My Cart
-              </Link>
-              <span>
-                (<span className="nav-count">{cartArray.length}</span>)
-              </span>
-            </div>
-            <div className="nav-cart">
-              <div>
-                <Link to={isAuthenticated === true ? "/cart" : "/login"}>
-                  <ShoppingCartIcon />
-                </Link>
-              </div>
-              <span className="nav-count">{cartArray.length}</span>
-            </div>
+          <li onClick={handleLogout}>
+            <Link to={navbarButtonText === "Login" ? "/login" : "/books"}>
+              <button>{navbarButtonText}</button>
+            </Link>
           </li>
-
           {/* Implementing this functionality later. */}
           {/* <li>
             <input type="text" placeholder="Search" />
