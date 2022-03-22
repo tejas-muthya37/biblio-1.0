@@ -181,7 +181,7 @@ function Products(props) {
                     dispatch({ type: "Category filter", payload: event.target })
                   }
                 />
-                <label htmlFor="thriller-category"> Thrillers </label>{" "}
+                <label htmlFor="Thriller"> Thrillers </label>{" "}
               </div>{" "}
               <div>
                 <input
@@ -193,7 +193,7 @@ function Products(props) {
                     dispatch({ type: "Category filter", payload: event.target })
                   }
                 />{" "}
-                <label htmlFor="drama-category"> Drama </label>{" "}
+                <label htmlFor="Drama"> Drama </label>{" "}
               </div>{" "}
               <div>
                 <input
@@ -205,7 +205,7 @@ function Products(props) {
                     dispatch({ type: "Category filter", payload: event.target })
                   }
                 />{" "}
-                <label htmlFor="scifi-category"> Sci - Fi </label>{" "}
+                <label htmlFor="Scifi"> Sci - Fi </label>{" "}
               </div>{" "}
               <div>
                 <input
@@ -217,7 +217,7 @@ function Products(props) {
                     dispatch({ type: "Category filter", payload: event.target })
                   }
                 />{" "}
-                <label htmlFor="romance-category"> Romance </label>{" "}
+                <label htmlFor="Romance"> Romance </label>{" "}
               </div>{" "}
             </div>
           )}
@@ -237,7 +237,10 @@ function Products(props) {
                   })
                 }
               />{" "}
-              <label htmlFor="radio-1"> 4 Stars & above </label>{" "}
+              <label htmlFor="rating-4-stars-and-above">
+                {" "}
+                4 Stars & above{" "}
+              </label>{" "}
             </div>{" "}
             <div>
               <input
@@ -253,7 +256,10 @@ function Products(props) {
                   })
                 }
               />{" "}
-              <label htmlFor="radio-2"> 3 Stars & above </label>{" "}
+              <label htmlFor="rating-3-stars-and-above">
+                {" "}
+                3 Stars & above{" "}
+              </label>{" "}
             </div>{" "}
             <div>
               <input
@@ -269,7 +275,10 @@ function Products(props) {
                   })
                 }
               />{" "}
-              <label htmlFor="radio-3"> 2 Stars & above </label>{" "}
+              <label htmlFor="rating-2-stars-and-above">
+                {" "}
+                2 Stars & above{" "}
+              </label>{" "}
             </div>{" "}
           </div>{" "}
           <div className="sort-filter input-filter">

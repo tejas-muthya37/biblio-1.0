@@ -1,6 +1,6 @@
 .landing-page-container.categories {
     margin: 20vh auto 0 auto;
-    width: 100%;
+    max-width: 100%;
     padding: 0;
     opacity: 1;
     display: flex;
