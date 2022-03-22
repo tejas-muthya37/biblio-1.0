@@ -25,6 +25,8 @@ function Navbar() {
         if (!data.message) {
           setIsAuthenticated(true);
           setNavbarButtonText("Logout");
+        } else {
+          setIsAuthenticated(false);
         }
       });
   }, []);
@@ -57,15 +59,7 @@ function Navbar() {
       setWishlistArray([]);
     }
 
-    const items = document.querySelectorAll(".nav-items li");
-    const burger = document.querySelector(".burger");
-    const nav = document.querySelector(".nav-items");
-
-    nav.classList.toggle("navSlide");
-    items.forEach((item) => {
-      item.style.animation = "";
-    });
-    burger.classList.toggle("toggle");
+    handleNavbar();
   };
 
   function handleClick() {
