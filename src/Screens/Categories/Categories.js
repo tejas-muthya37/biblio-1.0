@@ -10,6 +10,7 @@ function Categories() {
   return (
     <div className="Categories">
       <Navbar />
+      <h1 className="landing-page-container-title">CATEGORIES</h1>
       <div className="landing-page-container categories">
         <div className="landing-page-content categories">
           <Link to="/books/Thriller">
@@ -38,7 +39,7 @@ function Categories() {
           </Link>
         </div>
         <Link to="/books">
-          <button>Browse All Categories</button>
+          <button>Shop Now</button>
         </Link>
       </div>
     </div>
