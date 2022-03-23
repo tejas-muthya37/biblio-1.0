@@ -3,9 +3,12 @@ import { useRef } from "react";
 import Navbar from "./../../Components/Navbar/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { useNavbar } from "./../../Context/navbar-context";
+import { useToast } from "./../../Context/toast-context";
 
 function Authenticate(props) {
+  const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
   const { setNavbarButtonText } = useNavbar();
+  const emailPattern = /\S+@\S+\.\S+/;
   let navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -32,33 +35,63 @@ function Authenticate(props) {
             passwordRef.current.value = "";
             localStorage.setItem("ENCODED_TOKEN", data.encodedToken);
             setNavbarButtonText("Logout");
-            navigate(-1);
+            navigate("/books");
+          } else {
+            toggleToast(
+              "Invalid credentials! Please try again.",
+              "red",
+              "whitesmoke"
+            );
           }
         });
     } else if (props.cardTitle === "SIGN UP") {
-      fetch("/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (!data.errors) {
-            emailRef.current.value = "";
-            passwordRef.current.value = "";
-            localStorage.setItem("ENCODED_TOKEN", data.encodedToken);
-            setNavbarButtonText("Logout");
-            navigate(-1);
-          }
-        });
+      if (!emailPattern.test(payload.email)) {
+        toggleToast(
+          "Email Address is not valid! Please try again.",
+          "red",
+          "whitesmoke"
+        );
+      } else if (payload.password.length < 8) {
+        toggleToast(
+          "Password should be atleast 8 characters long!",
+          "red",
+          "whitesmoke"
+        );
+      } else {
+        fetch("/api/auth/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (!data.errors) {
+              emailRef.current.value = "";
+              passwordRef.current.value = "";
+              localStorage.setItem("ENCODED_TOKEN", data.encodedToken);
+              setNavbarButtonText("Logout");
+              navigate("/books");
+            }
+          });
+      }
     }
   };
   return (
     <div className="Authenticate">
       <Navbar />
+      <p
+        style={{
+          visibility: toastVisibility,
+          backgroundColor: toastColor.backgroundColor,
+          color: toastColor.color,
+        }}
+        className="message-toast"
+      >
+        {toastText}
+      </p>
       <div className="landing-card">
         <h1>{props.cardTitle}</h1>
         <div className="landing-inputs">
