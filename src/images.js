@@ -22,6 +22,10 @@ import scifiBookThree from "./Media/scifi-book-3.jpg";
 import scifiBookFour from "./Media/scifi-book-4.jpg";
 import scifiBookFive from "./Media/scifi-book-5.jpg";
 import scifiBookSix from "./Media/scifi-book-6.jpg";
+import category1 from "./Media/category-1.jpg";
+import category2 from "./Media/category-2.jpg";
+import category3 from "./Media/category-3.jpg";
+import category4 from "./Media/category-4.jpg";
 
 export {
   thrillerBookOne,
@@ -48,4 +52,8 @@ export {
   scifiBookFour,
   scifiBookFive,
   scifiBookSix,
+  category1,
+  category2,
+  category3,
+  category4,
 };

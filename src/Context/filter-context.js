@@ -9,6 +9,11 @@ const reducer = (state, action) => {
         ...state,
         items: action.payload,
       };
+    case "Categories setup":
+      return {
+        ...state,
+        categories: action.payload,
+      };
     case "Low to High":
       return {
         ...state,
@@ -103,6 +108,7 @@ const reducer = (state, action) => {
 
 const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
+    categories: [],
     items: [],
     categoryFiltersFlag: false,
     checkedCount: 0,
