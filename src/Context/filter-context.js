@@ -29,7 +29,6 @@ const reducer = (state, action) => {
         item.bookPrice > action.payload
           ? (item.show = false)
           : (item.show = true);
-
         return true;
       });
       return {
