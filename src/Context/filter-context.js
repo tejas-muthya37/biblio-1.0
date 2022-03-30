@@ -17,12 +17,12 @@ const reducer = (state, action) => {
     case "Low to High":
       return {
         ...state,
-        items: state.items.sort((a, b) => a.bookPrice - b.bookPrice),
+        items: [...state.items].sort((a, b) => a.bookPrice - b.bookPrice),
       };
     case "High to Low":
       return {
         ...state,
-        items: state.items.sort((a, b) => b.bookPrice - a.bookPrice),
+        items: [...state.items].sort((a, b) => b.bookPrice - a.bookPrice),
       };
     case "Price filter":
       state.items.map((item) => {
