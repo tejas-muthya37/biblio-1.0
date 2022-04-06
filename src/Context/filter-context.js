@@ -154,7 +154,6 @@ const FilterProvider = ({ children }) => {
       rating: 2,
       price: 450,
     },
-    checkedCount: 0,
   });
   return (
     <FilterContext.Provider value={{ state, dispatch }}>

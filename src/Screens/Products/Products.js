@@ -63,10 +63,6 @@ function Products(props) {
       });
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(state.filters);
-  });
-
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
   const { cartArray, setCartArray, wishlistArray, setWishlistArray } =

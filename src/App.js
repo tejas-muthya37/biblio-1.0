@@ -8,8 +8,11 @@ import Checkout from "./Screens/Checkout/Checkout";
 import Success from "./Screens/Success/Success";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
+import { useNavbar } from "./Context/navbar-context";
 
 function App() {
+  const { isAuthenticated, setIsAuthenticated } = useNavbar();
+
   return (
     <div className="App">
       <BrowserRouter>
