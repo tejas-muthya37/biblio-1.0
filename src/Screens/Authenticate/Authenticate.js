@@ -79,6 +79,12 @@ function Authenticate(props) {
       }
     }
   };
+
+  const handleGuestLogin = () => {
+    emailRef.current.value = "adarshbalika@gmail.com";
+    passwordRef.current.value = "adarshbalika";
+    handleAuth();
+  };
   return (
     <div className="Authenticate">
       <Navbar />
@@ -121,6 +127,9 @@ function Authenticate(props) {
           )}
         </div> */}
         <button onClick={handleAuth}>Next</button>
+        {props.cardTitle === "LOGIN" && (
+          <button onClick={handleGuestLogin}>Login As Guest</button>
+        )}
         <p className="alternate-cta">
           <Link to={props.cardTitle === "LOGIN" ? "/signup" : "/login"}>
             {props.alternate} <span>{">"}</span>
